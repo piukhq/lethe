@@ -1,0 +1,17 @@
+tests:
+  script:
+    - pip3 install -r requirements.txt
+    - py.test app/tests --cov=app
+
+flake8:
+  script:
+    - flake8 *
+
+# TODO
+#deploy:
+#  image: loyaltyangels/ansible
+#  stage: deploy
+#  script:
+#  - cd /ansible && ansible-playbook playbooks/deploy/flask.yml -e project=lethe -e hosts=dev_web
+#  only:
+#  - master
