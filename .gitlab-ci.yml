@@ -7,11 +7,10 @@ flake8:
   script:
     - flake8 *
 
-# TODO
-#deploy:
-#  image: loyaltyangels/ansible
-#  stage: deploy
-#  script:
-#  - cd /ansible && ansible-playbook playbooks/deploy/flask.yml -e project=lethe -e hosts=dev_web
-#  only:
-#  - master
+deploy:
+  image: loyaltyangels/ansible
+  stage: deploy
+  script:
+  - cd /ansible && ansible-playbook playbooks/deploy/flask.yml -e project=lethe -e hosts=dev_web
+  only:
+  - master
