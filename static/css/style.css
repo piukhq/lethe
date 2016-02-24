@@ -40,3 +40,8 @@
 .navbar {
     border-radius: 0px;
 }
+
+.flash-box > span:hover {
+    cursor: pointer;
+    color: #F4136B;
+}
