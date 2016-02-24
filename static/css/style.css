@@ -1,0 +1,42 @@
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 100px;
+    background-color: #f4136b;
+    color: #fff;
+    padding-top: 20px;
+}
+
+.footer ul {
+    list-style: none;
+}
+
+.footer a, a.navbar-link {
+    text-decoration: none;
+
+    color: #eee !important;
+
+    transition: color 0.2s, letter-spacing 0.2s;
+}
+
+.footer a:hover, a.navbar-link:hover {
+    color: #fff !important;
+
+    letter-spacing: 0.05em;
+}
+
+.navbar-header{
+   left: 50%;
+   position: relative;
+   transform: translateX(-50%);
+}
+
+.navbar-brand {
+    padding-top: 0px;
+}
+
+.navbar {
+    border-radius: 0px;
+}
