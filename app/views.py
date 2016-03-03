@@ -1,6 +1,8 @@
+import requests
 from app.models import is_valid_token
 from flask import Blueprint, render_template, request, flash, url_for
 from werkzeug.utils import redirect
+import settings
 
 frontend = Blueprint('frontend', __name__)
 
@@ -28,6 +30,9 @@ def new_password(link_token=None):
         if password != confirm_password:
             flash('The passwords you entered did not match. Please try again.')
             return redirect(url_for('frontend.new_password', link_token=link_token))
+
+        reset_password_url = "{}/{}".format(settings.HERMES_URL, "/users/reset_password")
+        requests.post(reset_password_url, data={'token': link_token})
 
         return redirect(url_for('frontend.account_updated'))
     else:
