@@ -29,18 +29,19 @@ class TestViews(LetheTestCase):
         self.assertIn(b'Your account has been updated.', resp.data)
 
     def test_post_no_password(self):
-        resp = self.client.post('/whatever')
+        self.client.post('/whatever')
         self.assert_flash('You must provide your new password.')
 
     def test_post_no_password_confirmation(self):
-        resp = self.client.post('/whatever', data={'new_password': 'whatever'})
+        self.client.post('/whatever', data={'new_password': 'whatever'})
         self.assert_flash('You must confirm your new password.')
 
     def test_post_non_matching_passwords(self):
-        resp = self.client.post('/whatever', data={'new_password': 'foo', 'confirm_new_password': 'bar'})
+        self.client.post('/whatever', data={'new_password': 'foo', 'confirm_new_password': 'bar'})
         self.assert_flash('The passwords you entered did not match. Please try again.')
 
     @patch('app.views.requests.post')
     def test_update_account(self, mock_post):
-        resp = self.client.post('/whatever', data={'new_password': 'foo', 'confirm_new_password': 'foo'}, follow_redirects=True)
+        resp = self.client.post('/whatever', data={'new_password': 'foo', 'confirm_new_password': 'foo'},
+                                follow_redirects=True)
         self.assertIn(b'Your account has been updated.', resp.data)
