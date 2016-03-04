@@ -1,14 +1,9 @@
-from unittest.mock import patch
-
+from app.exceptions import HermesBadResponseError
 from app.tests.lethe_test_case import LetheTestCase
+from unittest.mock import patch
 
 
 class TestViews(LetheTestCase):
-    def test_no_token(self):
-        resp = self.client.get('/')
-        self.assertEqual(200, resp.status_code)
-        self.assertIn(b'This link has expired', resp.data)
-
     @patch('app.views.is_valid_token')
     def test_bad_token(self, mock_is_valid_token):
         mock_is_valid_token.return_value = False
@@ -22,3 +17,30 @@ class TestViews(LetheTestCase):
         resp = self.client.get('/whatever')
         self.assertEqual(200, resp.status_code)
         self.assertIn(b'Confirm New Password', resp.data)
+
+    @patch('app.views.is_valid_token')
+    def test_hermes_error(self, mock_is_valid_token):
+        mock_is_valid_token.side_effect = HermesBadResponseError()
+        resp = self.client.get('/whatever')
+        self.assertIn(b'Sorry, something has gone wrong on our end.', resp.data)
+
+    def test_account_updated(self):
+        resp = self.client.get('/account_updated')
+        self.assertIn(b'Your account has been updated.', resp.data)
+
+    def test_post_no_password(self):
+        resp = self.client.post('/whatever')
+        self.assert_flash('You must provide your new password.')
+
+    def test_post_no_password_confirmation(self):
+        resp = self.client.post('/whatever', data={'new_password': 'whatever'})
+        self.assert_flash('You must confirm your new password.')
+
+    def test_post_non_matching_passwords(self):
+        resp = self.client.post('/whatever', data={'new_password': 'foo', 'confirm_new_password': 'bar'})
+        self.assert_flash('The passwords you entered did not match. Please try again.')
+
+    @patch('app.views.requests.post')
+    def test_update_account(self, mock_post):
+        resp = self.client.post('/whatever', data={'new_password': 'foo', 'confirm_new_password': 'foo'}, follow_redirects=True)
+        self.assertIn(b'Your account has been updated.', resp.data)

@@ -1,0 +1,2 @@
+class HermesBadResponseError(Exception):
+    pass
