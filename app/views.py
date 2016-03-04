@@ -32,7 +32,7 @@ def new_password(link_token=None):
             return redirect(url_for('frontend.new_password', link_token=link_token))
 
         reset_password_url = "{}/{}".format(settings.HERMES_URL, "/users/reset_password")
-        requests.post(reset_password_url, data={'token': link_token})
+        requests.post(reset_password_url, data={'token': link_token, 'password': password})
 
         return redirect(url_for('frontend.account_updated'))
     else:
