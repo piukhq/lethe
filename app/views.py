@@ -8,12 +8,12 @@ import settings
 frontend = Blueprint('frontend', __name__)
 
 
-@frontend.route('/account_updated')
+@frontend.route('/password/account_updated')
 def account_updated():
     return render_template('account_updated.html')
 
 
-@frontend.route('/<link_token>', methods=['GET', 'POST'])
+@frontend.route('/password/<link_token>', methods=['GET', 'POST'])
 def new_password(link_token=None):
     if request.method == 'POST':
         password = request.form.get('new_password')
