@@ -1,6 +1,7 @@
 import requests
 from app.exceptions import HermesBadResponseError
 from app.models import is_valid_token
+from app.utils import url_for
 from flask import Blueprint, render_template, request, flash
 from werkzeug.utils import redirect
 import settings
@@ -21,20 +22,20 @@ def new_password(link_token=None):
 
         if password is None:
             flash('You must provide your new password.')
-            return redirect('/password/{}'.format(link_token))
+            return redirect(url_for('password', link_token))
 
         if confirm_password is None:
             flash('You must confirm your new password.')
-            return redirect('/password/{}'.format(link_token))
+            return redirect(url_for('password', link_token))
 
         if password != confirm_password:
             flash('The passwords you entered did not match. Please try again.')
-            return redirect('/password/{}'.format(link_token))
+            return redirect(url_for('password', link_token))
 
-        reset_password_url = "{}/{}".format(settings.HERMES_URL, 'users/reset_password')
+        reset_password_url = "{}/{}".format(settings.HERMES_URL, "/users/reset_password")
         requests.post(reset_password_url, data={'token': link_token, 'password': password})
 
-        return redirect('/password/account_updated')
+        return redirect(url_for('password/account_updated'))
     else:
         try:
             if is_valid_token(link_token):
