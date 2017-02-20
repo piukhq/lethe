@@ -5,14 +5,7 @@
     <div class='container'>
         <div class='row'>
             <div class='col-md-6 col-md-offset-3'>
-                {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                        {% for message in messages %}
-                        <h1>Error</h1>
-                        <p>{{message}}</p>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
+                <h1 style="text-align:center;">Error</h1>
             </div>
         </div>
     </div>
