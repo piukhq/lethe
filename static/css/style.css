@@ -25,3 +25,7 @@ hr {
     cursor: pointer;
     color: #F4136B;
 }
+
+a:-webkit-any-link {
+    text-decoration: none;
+}
