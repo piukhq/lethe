@@ -12,17 +12,30 @@
         <title>Forgotten Password &middot; Bink</title>
     </head>
     <body>
-        <nav class='navbar navbar-default'>
-            <div class='container'>
-                <div class='navbar-header'>
-                    <a class='navbar-brand' href='/'>
-                        <img alt='Brand' src='/static/img/logo.png'>
-                    </a>
-                </div>
+        <nav class='navbar'>
+            <a class='navbar-brand' href='/'>
+                <img alt='Brand' src='/static/img/logo.png' width="80" height="40">
+            </a>
+            <div class="social-icons-main">
+                <a class="social-icons-sub" href='https://www.linkedin.com/company/bink'>
+                    <img class="social-icons-img" alt="LinkedIn" src="/static/img/linkedin.png">
+                </a>
+                <a class="social-icons-sub" href='https://facebook.com/hellobink'>
+                    <img class="social-icons-img" alt="Facebook" src="/static/img/fb.png">
+                </a>
+                <a class="social-icons-sub" href='https://twitter.com/hellobink'>
+                    <img class="social-icons-img" alt="Twitter" src="/static/img/twit.png">
+                </a>
+                <a href='https://instagram.com/binkhq'>
+                    <img class="social-icons-img" alt="Instagram" src="/static/img/insta.png">
+                </a>
             </div>
         </nav>
-
+        <hr/>
         <div class='container'>
+            <div class="row">
+                <p class="text-center"><img id="padlock" alt="Padlock" src="/static/img/padlock.png"></p>
+            </div>
             <div class='row'>
                 <div class='col-md-6 col-md-offset-3'>
                     {% with messages = get_flashed_messages() %}
@@ -40,45 +53,6 @@
             {% block page_content %}
             {% endblock %}
         </div>
-
-        <footer class='footer'>
-            <div class='container'>
-                <div class='row'>
-                    <div class='col-xs-6'>
-                        <ul>
-                            <li>
-                                <span class='fa fa-globe fa-fw' aria-hidden='true'></span>
-                                <a href='https://hellobink.com'>hellobink.com</a>
-                            </li>
-                            <li>
-                                <span class='fa fa-twitter-square fa-fw' aria-hidden='true'></span>
-                                <a href='https://twitter.com/hellobink'>Twitter</a>
-                            </li>
-                            <li>
-                                <span class='fa fa-facebook-square fa-fw' aria-hidden='true'></span>
-                                <a href='https://facebook.com/hellobink'>Facebook</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class='col-xs-6'>
-                        <ul>
-                            <li>
-                                <span class='fa fa-apple fa-fw' aria-hidden='true'></span>
-                                <a href='https://itunes.apple.com/us/app/facebook/id284882215?mt=8'>iOS</a>
-                            </li>
-                            <li>
-                                <span class='fa fa-android fa-fw' aria-hidden='true'></span>
-                                <a href='https://play.google.com/store/apps/details?id=com.facebook.katana'>Android</a>
-                            </li>
-                            <li>
-                                <span class='fa fa-comment fa-fw' aria-hidden='true'></span>
-                                <a href='https://hellobink.com/contact'>Contact Us</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </footer>
 
         <script src='https://code.jquery.com/jquery-1.12.0.min.js'></script>
         <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js' integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS' crossorigin='anonymous'></script>

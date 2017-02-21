@@ -1,47 +1,51 @@
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    /* Set the fixed height of the footer here */
-    height: 100px;
-    background-color: #f4136b;
-    color: #fff;
-    padding-top: 20px;
-}
-
-.footer ul {
-    list-style: none;
-}
-
-.footer a, a.navbar-link {
-    text-decoration: none;
-
-    color: #eee !important;
-
-    transition: color 0.2s, letter-spacing 0.2s;
-}
-
-.footer a:hover, a.navbar-link:hover {
-    color: #fff !important;
-
-    letter-spacing: 0.05em;
-}
-
 .navbar-header{
-   left: 50%;
+   left: 0%;
    position: relative;
-   transform: translateX(-50%);
 }
 
 .navbar-brand {
     padding-top: 0px;
 }
 
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-bottom: 2px solid #f20060;
+    margin: 1em 0;
+    padding: 0;
+}
+
 .navbar {
+    padding-top: 25px;
     border-radius: 0px;
 }
 
 .flash-box > span:hover {
     cursor: pointer;
     color: #F4136B;
+}
+
+a:-webkit-any-link {
+    text-decoration: none;
+}
+
+.social-icons-main {
+    float: right;
+    margin-right: 20px;
+}
+
+.social-icons-sub {
+    margin-right:20px;
+}
+
+.social-icons-img {
+    border: 0px;
+    width: 40px;
+    height: 40px;
+}
+
+#padlock {
+    width: 80px;
+    height: 120px;
 }
