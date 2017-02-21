@@ -29,3 +29,18 @@ hr {
 a:-webkit-any-link {
     text-decoration: none;
 }
+
+.social-icons-main {
+    float: right;
+    margin-right: 20px;
+}
+
+.social-icons-sub {
+    margin-right:20px;
+}
+
+.social-icons-img {
+    border: 0px;
+    width: 40px;
+    height: 40px;
+}
