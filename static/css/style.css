@@ -32,7 +32,7 @@ a:-webkit-any-link {
 
 .social-icons-main {
     float: right;
-    margin-right: 20px;
+    margin-right: 65px;
 }
 
 .social-icons-sub {
@@ -52,7 +52,8 @@ a:-webkit-any-link {
 }
 
 #header-line {
-    height: 3px;
+    background-color: #f20060;
+    height: 1px;
 }
 
 .bink-header {
@@ -62,7 +63,7 @@ a:-webkit-any-link {
 }
 
 #bink-logo {
-    margin-top: 5px;
+    margin-left: 65px;
     height: 50px;
     width: 97px;
     max-height: 50px;
@@ -70,16 +71,30 @@ a:-webkit-any-link {
 
 @media only screen and (max-device-width: 768px) {
     #bink-logo {
+        margin-top: 10px;
+        margin-left: 25px;
         height: 34px;
         width: 60px;
         max-height: 34px;
+    }
+
+    .social-icons-main {
+        float: right;
+        margin-right: 25px;
     }
 }
 
 @media only screen and (max-device-width: 480px) {
     #bink-logo {
+        margin-top: 10px;
+        margin-left: 25px;
         height: 34px;
         width: 60px;
         max-height: 34px;
+    }
+
+    .social-icons-main {
+        float: right;
+        margin-right: 25px;
     }
 }
