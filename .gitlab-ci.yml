@@ -17,13 +17,38 @@ flake8:
   tags:
     - docker
 
-deploy:
-  image: hellobink/ansible
+deploy_dev:
   stage: deploy
   environment: dev
   script:
-    - cd /ansible && ansible-playbook playbooks/deploy/flask.yml -e project=lethe -e hosts=dev_web
+    - docker build -t hellobink/lethe:dev .
+    - docker login -u binkautomation -p epitome-generic-basilisk
+    - docker push hellobink/lethe:dev
   only:
     - master
   tags:
-    - docker
+    - shell
+
+deploy_staging:
+  stage: deploy
+  environment: staging
+  script:
+    - docker build -t hellobink/lethe:staging .
+    - docker login -u binkautomation -p epitome-generic-basilisk
+    - docker push hellobink/lethe:staging
+  only:
+    - staging
+  tags:
+    - shell
+
+deploy_production:
+  stage: deploy
+  environment: production
+  script:
+    - docker build -t hellobink/lethe:production .
+    - docker login -u binkautomation -p epitome-generic-basilisk
+    - docker push hellobink/lethe:production
+  only:
+    - production
+  tags:
+    - shell
