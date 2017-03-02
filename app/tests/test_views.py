@@ -4,6 +4,7 @@ from unittest.mock import patch
 
 
 class TestViews(LetheTestCase):
+
     @patch('app.views.is_valid_token')
     def test_bad_token(self, mock_is_valid_token):
         mock_is_valid_token.return_value = False
@@ -40,11 +41,9 @@ class TestViews(LetheTestCase):
         self.client.post('/password/whatever', data={'new_password': 'foo', 'confirm_new_password': 'bar'})
         self.assert_flash('The passwords you entered did not match. Please try again.')
 
-    @patch('app.views.url_for')
     @patch('app.views.requests.post')
-    def test_update_account(self, mock_post, mock_url_for):
+    def test_update_account(self, mock_post):
         # mock_redirect.return_value = 'Your account has been updated.'
-        mock_url_for.return_value = '/password/account_updated'
         resp = self.client.post('/password/whatever', data={'new_password': 'foo', 'confirm_new_password': 'foo'},
                                 follow_redirects=True)
         self.assertIn(b'Your account has been updated.', resp.data)
