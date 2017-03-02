@@ -42,6 +42,9 @@ def new_password(link_token=None):
             for element in j['password']:
                 flash('This password is invalid. ' + element[26:])
             return redirect(url_for('password', link_token))
+        else:
+            flash('Sorry, something has gone wrong on our end. Give us some time to fix it, and try again later!')
+            return render_template('error_page.html')
     else:
         try:
             if is_valid_token(link_token):
