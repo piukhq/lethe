@@ -5,6 +5,7 @@ from unittest.mock import patch
 
 
 class TestModels(LetheTestCase):
+
     @patch('app.models.requests.post')
     def test_invalid_token(self, mock_post):
         mock_post.return_value.status_code = 404
