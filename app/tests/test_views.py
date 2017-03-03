@@ -44,20 +44,23 @@ class TestViews(LetheTestCase):
     @patch('app.views.requests.post')
     def test_update_account_good_pw(self, mock_post):
         mock_post.return_value.status_code = 200
-        resp = self.client.post('/password/whatever', data={'new_password': 'Password123', 'confirm_new_password': 'Password123'},
+        resp = self.client.post('/password/whatever', data={'new_password': 'Password123',
+                                                            'confirm_new_password': 'Password123'},
                                 follow_redirects=True)
         self.assertIn(b'Your account has been updated.', resp.data)
 
     @patch('app.views.requests.post')
     def test_update_account_bad_pw(self, mock_post):
         mock_post.return_value.status_code = 400
-        resp = self.client.post('/password/whatever', data={'new_password': 'rubbishpassword', 'confirm_new_password': 'rubbishpassword'},
+        resp = self.client.post('/password/whatever', data={'new_password': 'rubbishpassword',
+                                                            'confirm_new_password': 'rubbishpassword'},
                                 follow_redirects=True)
         self.assertIn(b'This password is invalid.', resp.data)
 
     @patch('app.views.requests.post')
     def test_update_account_broken(self, mock_post):
         mock_post.return_value.status_code = 404
-        resp = self.client.post('/password/whatever', data={'new_password': 'rubbishpassword', 'confirm_new_password': 'rubbishpassword'},
+        resp = self.client.post('/password/whatever', data={'new_password': 'rubbishpassword',
+                                                            'confirm_new_password': 'rubbishpassword'},
                                 follow_redirects=True)
         self.assertIn(b'Sorry, something has gone wrong on our end.', resp.data)
