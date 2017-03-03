@@ -31,10 +31,21 @@ def new_password(link_token=None):
             flash('The passwords you entered did not match. Please try again.')
             return redirect(url_for('frontend.new_password', link_token=link_token))
 
-        reset_password_url = "{}/{}".format(settings.HERMES_URL, "/users/reset_password_from_token")
-        requests.post(reset_password_url, data={'token': link_token, 'password': password})
+        reset_password_url = "{}/{}".format(settings.HERMES_URL, "/users/reset_password")
+        response = requests.post(reset_password_url, data={'token': link_token, 'password': password})
 
-        return redirect(url_for('frontend.account_updated'))
+        if response.status_code == 200:
+            return redirect(url_for('frontend.account_updated'))
+        elif response.status_code == 400:
+            j = response.json()
+            err = 'This password is invalid. '
+            for element in j['password']:
+                err += element[26:] + ' '
+            flash(err)
+            return redirect(url_for('frontend.new_password', link_token=link_token))
+        else:
+            flash('Sorry, something has gone wrong on our end. Give us some time to fix it, and try again later!')
+            return render_template('error_page.html')
     else:
         try:
             if is_valid_token(link_token):
