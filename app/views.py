@@ -41,7 +41,8 @@ def new_password(link_token=None):
             flash(err)
             return redirect(url_for('frontend.new_password', link_token=link_token))
         else:
-            flash('Sorry, either your link has expired or something has gone wrong on our end. Give us some time to fix it, and try again later!')
+            flash('Sorry, either your link has expired or something has gone wrong on our end. '
+                  'Give us some time to fix it, and try again later!')
             return render_template('error_page.html')
     else:
         try:
