@@ -35,12 +35,14 @@ def new_password(link_token=None):
         response = requests.post(reset_password_url, data={'token': link_token, 'password': password})
 
         if response.status_code == 200:
-            return redirect(url_for('password/account_updated'))
+            return redirect(url_for('frontend.account_updated'))
         elif response.status_code == 400:
             j = response.json()
+            err = 'This password is invalid. '
             for element in j['password']:
-                flash('This password is invalid. ' + element[26:])
-            return redirect(url_for('password', link_token))
+                err += element[26:] + ' '
+            flash(err)
+            return redirect(url_for('frontend.new_password', link_token=link_token))
         else:
             flash('Sorry, something has gone wrong on our end. Give us some time to fix it, and try again later!')
             return render_template('error_page.html')
