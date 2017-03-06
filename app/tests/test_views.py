@@ -55,7 +55,8 @@ class TestViews(LetheTestCase):
         resp = self.client.post('/password/whatever', data={'new_password': 'rubbishpassword',
                                                             'confirm_new_password': 'rubbishpassword'},
                                 follow_redirects=True)
-        self.assertIn(b'This password is invalid.', resp.data)
+        self.assertIn(b'Password should be 8 or more characters, with at least 1 uppercase, 1 lowercase and a number',
+                      resp.data)
 
     @patch('app.views.requests.post')
     def test_update_account_broken(self, mock_post):
@@ -63,4 +64,4 @@ class TestViews(LetheTestCase):
         resp = self.client.post('/password/whatever', data={'new_password': 'rubbishpassword',
                                                             'confirm_new_password': 'rubbishpassword'},
                                 follow_redirects=True)
-        self.assertIn(b'Sorry, something has gone wrong on our end.', resp.data)
+        self.assertIn(b'Sorry, either your link has expired or something has gone wrong on our end.', resp.data)

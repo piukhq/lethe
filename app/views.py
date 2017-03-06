@@ -37,14 +37,12 @@ def new_password(link_token=None):
         if response.status_code == 200:
             return redirect(url_for('frontend.account_updated'))
         elif response.status_code == 400:
-            j = response.json()
-            err = 'This password is invalid. '
-            for element in j['password']:
-                err += element[26:] + ' '
+            err = 'Password should be 8 or more characters, with at least 1 uppercase, 1 lowercase and a number'
             flash(err)
             return redirect(url_for('frontend.new_password', link_token=link_token))
         else:
-            flash('Sorry, something has gone wrong on our end. Give us some time to fix it, and try again later!')
+            flash('Sorry, either your link has expired or something has gone wrong on our end. '
+                  'Give us some time to fix it, and try again later!')
             return render_template('error_page.html')
     else:
         try:
