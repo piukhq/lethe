@@ -64,4 +64,4 @@ class TestViews(LetheTestCase):
         resp = self.client.post('/password/whatever', data={'new_password': 'rubbishpassword',
                                                             'confirm_new_password': 'rubbishpassword'},
                                 follow_redirects=True)
-        self.assertIn(b'Sorry, either your link has expired or something has gone wrong on our end.', resp.data)
+        self.assertIn(b'This link has expired', resp.data)
