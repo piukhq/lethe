@@ -1,7 +1,7 @@
 import requests
 from app.exceptions import HermesBadResponseError
 from app.models import is_valid_token
-from flask import Blueprint, render_template, request, flash, url_for
+from flask import Blueprint, render_template, request, flash
 from werkzeug.utils import redirect
 import settings
 
@@ -13,6 +13,12 @@ def account_updated():
     return render_template('account_updated.html')
 
 
+def url(endpoint):
+    return '{}/{}/{}'.format(settings.EXTERNAL_SERVER_NAME,
+                             frontend.url_prefix.lstrip('/'),
+                             endpoint.lstrip('/'))
+
+
 @frontend.route('/<link_token>', methods=['GET', 'POST'])
 def new_password(link_token=None):
     if request.method == 'POST':
@@ -21,25 +27,25 @@ def new_password(link_token=None):
 
         if password is None:
             flash('You must provide your new password.')
-            return redirect(url_for('frontend.new_password', link_token=link_token))
+            return redirect(url(link_token))
 
         if confirm_password is None:
             flash('You must confirm your new password.')
-            return redirect(url_for('frontend.new_password', link_token=link_token))
+            return redirect(url(link_token))
 
         if password != confirm_password:
             flash('The passwords you entered did not match. Please try again.')
-            return redirect(url_for('frontend.new_password', link_token=link_token))
+            return redirect(url(link_token))
 
         reset_password_url = "{}/{}".format(settings.HERMES_URL, "/users/reset_password")
         response = requests.post(reset_password_url, data={'token': link_token, 'password': password})
 
         if response.status_code == 200:
-            return redirect(url_for('frontend.account_updated'))
+            return redirect(url('account_updated'))
         elif response.status_code == 400:
             err = 'Password should be 8 or more characters, with at least 1 uppercase, 1 lowercase and a number'
             flash(err)
-            return redirect(url_for('frontend.new_password', link_token=link_token))
+            return redirect(url(link_token))
         else:
             return render_template('link_expired.html')
     else:
