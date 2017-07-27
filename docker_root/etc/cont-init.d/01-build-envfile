@@ -1,0 +1,9 @@
+#!/usr/bin/with-contenv /bin/bash
+
+ENVFILE="/usr/local/src/lethe/.env"
+
+touch $ENVFILE
+chown apps:apps $ENVFILE
+
+echo "HERMES_URL=$HERMES_URL" > $ENVFILE
+echo "LETHE_URL=$LETHE_URL" >> $ENVFILE
