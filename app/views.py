@@ -5,7 +5,13 @@ from flask import Blueprint, render_template, request, flash
 from werkzeug.utils import redirect
 import settings
 
+internal = Blueprint('internal', __name__)
 frontend = Blueprint('frontend', __name__, url_prefix='/password')
+
+
+@internal.route('/healthz')
+def healthz():
+    return ''
 
 
 @frontend.route('/account_updated')
