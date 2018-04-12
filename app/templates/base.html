@@ -1,24 +1,24 @@
 <!doctype html>
 <html>
     <head>
-        <meta charset='utf-8'>
-        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel='stylesheet' href='/password/static/css/bootstrap.min.css'>
-        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
-        <link rel='stylesheet' href='/password/static/css/style.css'>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css' ) }}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
         <title>Forgotten Password &middot; Bink</title>
     </head>
     <body>
-        <nav class='navbar bink-header'>
-            <a class='navbar-brand' href='https://www.bink.com'>
-                <img alt='bink.com' src='/password/static/img/logo.png' id="bink-logo">
+        <nav class="navbar bink-header">
+            <a class="navbar-brand" href="https://www.bink.com">
+                <img alt="bink.com" src="{{ url_for('static', filename='img/logo.png') }}" id="bink-logo">
             </a>
             <div class="social-icons-main">
                 <a class="social-icons-sub" href='https://www.linkedin.com/company/bink'>
-                    <img class="social-icons-img" alt="LinkedIn" src="/password/static/img/linkedin.png">
+                    <img class="social-icons-img" alt="LinkedIn" src="{{ url_for('static', filename='img/linkedin.png') }}">
                 </a>
                 <a class="social-icons-sub" href='https://facebook.com/hellobink'>
                     <img class="social-icons-img" alt="Facebook" src="/password/static/img/fb.png">
@@ -32,17 +32,17 @@
             </div>
         </nav>
         <hr id="header-line"/>
-        <div class='container'>
+        <div class="container">
             <div class="row">
-                <p class="text-center"><img id="padlock" alt="Padlock" src="/password/static/img/padlock.png"></p>
+                <p class="text-center"><img id="padlock" alt="Padlock" src="{{ url_for('static', filename='img/padlock.png') }}"></p>
             </div>
-            <div class='row'>
-                <div class='col-md-6 col-md-offset-3'>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
                     {% with messages = get_flashed_messages() %}
                         {% if messages %}
                             {% for message in messages %}
-                            <div id='flash-{{loop.index}}' class='flash-box alert alert-info' role='alert'>
-                                <span class='pull-right fa fa-close' onclick="close_span('#flash-{{loop.index}}')"></span>
+                            <div id="flash-{{loop.index}}" class="flash-box alert alert-info" role="alert">
+                                <span class="pull-right fa fa-close" onclick="close_span('#flash-{{loop.index}}')"></span>
                                 {{message}}
                             </div>
                             {% endfor %}
@@ -54,8 +54,8 @@
             {% endblock %}
         </div>
 
-        <script src='https://code.jquery.com/jquery-1.12.0.min.js'></script>
-        <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js' integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS' crossorigin='anonymous'></script>
-        <script src='/password/static/js/script.js'></script>
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     </body>
 </html>
