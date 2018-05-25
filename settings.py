@@ -19,4 +19,6 @@ HERMES_URL = env_var('HERMES_URL', 'http://dev.hermes.loyaltyangels.local')
 # example: https://api.chingrewards.com
 EXTERNAL_SERVER_NAME = env_var('EXTERNAL_SERVER_NAME', '')
 
+STATIC_URL = env_var('LETHE_STATIC_URL', '/static/')
+
 SECRET_KEY = '\xb9\xd1\xc13\xf3\x04\xdf\x89\xbd\xca\x8e\x16\xda\xcaj\x04\x88\xd1\x13;\xcc\xb8\x927'
