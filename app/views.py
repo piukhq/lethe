@@ -43,7 +43,7 @@ def new_password(link_token=None):
             flash('The passwords you entered did not match. Please try again.')
             return redirect(url(link_token))
 
-        reset_password_url = "{}/{}".format(settings.HERMES_URL, "/users/reset_password")
+        reset_password_url = "{}{}".format(settings.HERMES_URL, "/users/reset_password")
         response = requests.post(reset_password_url, data={'token': link_token, 'password': password})
 
         if response.status_code == 200:
