@@ -6,7 +6,7 @@ stages:
 tests:
   stage: tests
   script:
-    - pip3 install -r requirements.txt
+    - pipenv install --system
     - py.test app/tests --cov=app
 
 complexity:
