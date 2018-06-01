@@ -3,6 +3,7 @@ contextlib2==0.5.1
 coverage==4.0.3
 flake8==2.5.4
 Flask==0.10.1
+Flask-CDN==1.5.3
 Flask-Script==2.0.5
 Flask-Testing==0.4.2
 itsdangerous==0.24
