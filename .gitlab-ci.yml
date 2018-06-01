@@ -6,8 +6,9 @@ stages:
 tests:
   stage: tests
   script:
-    - pipenv install --system
-    - py.test app/tests --cov=app
+    - pipenv install --dev
+    - pipenv run coverage run --source='.' manage.py test -v 2
+    - pipenv run coverage report
 
 complexity:
   stage: tests

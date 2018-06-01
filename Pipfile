@@ -28,6 +28,9 @@ importmagic = "*"
 "autopep8" = "*"
 yapf = "*"
 "flake8" = "*"
+pytest = "*"
+coverage = "*"
+pytest-cov = "*"
 
 [requires]
 python_version = "3.6"
