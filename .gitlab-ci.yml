@@ -50,6 +50,7 @@ deploy-dev:
   image: binkops.azurecr.io/kubedeployer:latest
   environment: dev
   script:
+    - ENVIRONMENT=dev deploystatic
     - kubectl config use-context dev
     - kubectl delete po $(kubectl get po --no-headers=true -l run=lethe -o custom-columns=:metadata.name)
   only:
@@ -60,6 +61,7 @@ deploy-staging:
   image: binkops.azurecr.io/kubedeployer:latest
   environment: staging
   script:
+    - ENVIRONMENT=staging deploystatic
     - kubectl config use-context staging
     - kubectl set image deployment/lethe:$CI_COMMIT_TAG
   only:
@@ -70,6 +72,7 @@ deploy-prod:
   image: binkops.azurecr.io/kubedeployer:latest
   environment: prod
   script:
+    - ENVIRONMENT=prod deploystatic
     - kubectl config use-context prod
     - kubectl set image deployment/lethe:$CI_COMMIT_TAG
   when: manual
