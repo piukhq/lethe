@@ -1,0 +1,35 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+requests = "*"
+"contextlib2" = "*"
+coverage = "*"
+"flake8" = "*"
+itsdangerous = "*"
+mccabe = "*"
+"pep8" = "*"
+pyflakes = "*"
+raven = {extras = ["flask"]}
+Flask = "*"
+Flask-CDN = "*"
+Flask-Script = "*"
+"Jinja2" = "*"
+MarkupSafe = "*"
+SQLAlchemy = "*"
+Werkzeug = "*"
+flask-testing = "*"
+
+[dev-packages]
+jedi = "*"
+importmagic = "*"
+"autopep8" = "*"
+yapf = "*"
+"flake8" = "*"
+pytest = "*"
+pytest-cov = "*"
+
+[requires]
+python_version = "3.6"
