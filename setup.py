@@ -1,6 +1,6 @@
 from setuptools import setup
 
-from version import __version__
+from app.version import __version__
 
 
 setup(
