@@ -1,8 +1,11 @@
 from setuptools import setup
 
+from app.version import __version__
+
+
 setup(
     name='lethe',
-    version='1.0',
+    version=__version__,
     description='Forgotten password frontend. Allows users to change their password using a reset token.',
     url='https://git.bink.com/Olympus/lethe',
     author='Chris Latham',
