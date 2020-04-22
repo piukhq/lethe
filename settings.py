@@ -32,3 +32,4 @@ STATIC_URL = env_var('LETHE_STATIC_URL', '/static/')
 SECRET_KEY = '\xb9\xd1\xc13\xf3\x04\xdf\x89\xbd\xca\x8e\x16\xda\xcaj\x04\x88\xd1\x13;\xcc\xb8\x927'
 
 SENTRY_DSN = env_var('SENTRY_DSN')
+SENTRY_ENV = env_var('SENTRY_ENV')

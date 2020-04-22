@@ -1,24 +1,28 @@
 stages:
-  - tests
+  - test
   - build
-  - tagging
+  - dev
+  - staging
+  - production
 
 tests:
-  stage: tests
+  stage: test
   image: olympus.azurecr.io/python:3.6
   script:
     - pipenv install --dev
     - pipenv run pytest app/tests --cov=app
 
 complexity:
-  stage: tests
+  stage: test
+  image: olympus.azurecr.io/python:3.6
   script:
     - xenon --max-average A --max-modules B --max-absolute B .
 
 flake8:
-  stage: tests
+  stage: test
+  image: olympus.azurecr.io/python:3.6
   script:
-    - flake8 *
+    - flake8
 
 build-develop:
   stage: build
@@ -47,27 +51,30 @@ build-master:
     - tags
 
 tag-develop:
-  stage: tagging
+  stage: dev
   image: binkops.azurecr.io/tagbot:latest
-  environment: dev
+  environment:
+    name: dev
   script:
     - tagbot --username "$CI_REGISTRY_USER" --password "$CI_REGISTRY_PASSWORD" --source "$CI_REGISTRY/lethe:latest" --tag "develop-$CI_COMMIT_SHORT_SHA"
   only:
     - develop
 
 tag-staging:
-  stage: tagging
+  stage: staging
   image: binkops.azurecr.io/tagbot:latest
-  environment: staging
+  environment:
+    name: staging
   script:
     - tagbot --username "$CI_REGISTRY_USER" --password "$CI_REGISTRY_PASSWORD" --source "$CI_REGISTRY/lethe:$CI_COMMIT_TAG" --tag "staging-$CI_COMMIT_TAG"
   only:
     - tags
 
 tag-prod:
-  stage: tagging
+  stage: production
   image: binkops.azurecr.io/tagbot:latest
-  environment: prod
+  environment:
+    name: prod
   script:
     - tagbot --username "$CI_REGISTRY_USER" --password "$CI_REGISTRY_PASSWORD" --source "$CI_REGISTRY/lethe:$CI_COMMIT_TAG" --tag "prod-$CI_COMMIT_TAG"
   when: manual
