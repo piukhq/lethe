@@ -1,13 +1,10 @@
-import logging
-
+from sentry_sdk.integrations.flask import FlaskIntegration
 from flask import Flask
 from flask_cdn import CDN
-from raven.contrib.flask import Sentry
+import sentry_sdk
 
-from .version import __version__
 import settings
 
-sentry = Sentry()
 cdn = CDN()
 
 
@@ -26,11 +23,14 @@ def create_app(config_name='settings'):
     cdn.init_app(app)
 
     if app.config.get('SENTRY_DSN'):
-        sentry.init_app(
-            app,
+        from app.version import __version__
+        sentry_sdk.init(
             dsn=app.config['SENTRY_DSN'],
-            logging=True,
-            level=logging.ERROR)
-        sentry.client.release = __version__
+            environment=app.config['SENTRY_ENV'],
+            integraitons=[
+                FlaskIntegration()
+            ],
+            release=__version__
+        )
 
     return app
