@@ -27,7 +27,7 @@ def create_app(config_name='settings'):
         sentry_sdk.init(
             dsn=app.config['SENTRY_DSN'],
             environment=app.config['SENTRY_ENV'],
-            integraitons=[
+            integrations=[
                 FlaskIntegration()
             ],
             release=__version__
