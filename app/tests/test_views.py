@@ -1,9 +1,31 @@
+import json
 from app.exceptions import HermesBadResponseError
 from app.tests.lethe_test_case import LetheTestCase
 from unittest.mock import patch
 
 
 class TestViews(LetheTestCase):
+    def test_healthz(self):
+        resp = self.client.get('/healthz')
+        self.assertEqual(resp.status_code, 204)
+
+    def test_livez(self):
+        resp = self.client.get('/livez')
+        self.assertEqual(resp.status_code, 204)
+
+    @patch('app.views.is_hermes_ready')
+    def test_readyz_successful(self, mock_is_hermes_ready):
+        mock_is_hermes_ready.return_value = (True, '')
+        resp = self.client.get('/readyz')
+        self.assertEqual(resp.status_code, 204)
+
+    @patch('app.views.is_hermes_ready')
+    def test_readyz_fail(self, mock_is_hermes_ready):
+        mock_is_hermes_ready.return_value = (False, 'nah mate hermes sad')
+        resp = self.client.get('/readyz')
+        error_json = json.loads(resp.data)
+        self.assertIn('error', error_json)
+        self.assertEqual(error_json['error'], 'nah mate hermes sad')
 
     @patch('app.views.is_valid_token')
     def test_bad_token(self, mock_is_valid_token):
