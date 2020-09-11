@@ -7,21 +7,24 @@ stages:
 
 tests:
   stage: test
-  image: olympus.azurecr.io/python:3.6
+  image: binkhq/python:3.8
   script:
+    - pip install pipenv==2018.11.26
     - pipenv install --dev
     - pipenv run pytest app/tests --cov=app
 
 complexity:
   stage: test
-  image: olympus.azurecr.io/python:3.6
+  image: binkhq/python:3.8
   script:
+    - pip install xenon
     - xenon --max-average A --max-modules B --max-absolute B .
 
 flake8:
   stage: test
-  image: olympus.azurecr.io/python:3.6
+  image: binkhq/python:3.8
   script:
+    - pip install flake8
     - flake8
 
 build-develop:

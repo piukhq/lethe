@@ -1,4 +1,6 @@
 import requests
+from typing import Tuple
+
 import settings
 from app.exceptions import HermesBadResponseError
 
@@ -15,3 +17,14 @@ def is_valid_token(token):
         return False
     else:
         raise HermesBadResponseError('Hermes returned error code {}'.format(response.status_code))
+
+
+def is_hermes_ready() -> Tuple[bool, str]:
+    try:
+        resp = requests.get(settings.HERMES_URL + '/healthz', timeout=2)
+        if resp.status_code not in (200, 204, 404):
+            return False, f'Hermes not available, status: {resp.status_code}'
+    except Exception as err:
+        return False, f'Hermes not available, error: {err}'
+
+    return True, ''

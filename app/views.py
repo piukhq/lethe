@@ -1,7 +1,7 @@
 import requests
 from app.exceptions import HermesBadResponseError
-from app.models import is_valid_token
-from flask import Blueprint, render_template, request, flash
+from app.models import is_valid_token, is_hermes_ready
+from flask import Blueprint, render_template, request, flash, jsonify
 from werkzeug.utils import redirect
 import settings
 
@@ -11,7 +11,22 @@ frontend = Blueprint('frontend', __name__, url_prefix='/password')
 
 @internal.route('/healthz')
 def healthz():
-    return ''
+    return '', 204
+
+
+@internal.route('/livez')
+def livez():
+    return '', 204
+
+
+@internal.route('/readyz')
+def readyz():
+    # Check if hermes is up as its a direct dependency
+    ok, output = is_hermes_ready()
+    if not ok:
+        output = jsonify({'error': output})
+
+    return output, 204 if ok else 500
 
 
 @frontend.route('/account_updated')
