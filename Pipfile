@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 requests = "*"
 Flask = "*"
-Flask-CDN = "*"
 "Jinja2" = "*"
 Werkzeug = "*"
 markupsafe = "==1.1.1"
@@ -15,6 +14,7 @@ blinker = "*"
 
 [dev-packages]
 jedi = "*"
+flask_script = "*"
 importmagic = "*"
 "autopep8" = "*"
 yapf = "*"
