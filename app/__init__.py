@@ -1,5 +1,3 @@
-import os
-
 import sentry_sdk
 from flask import Flask
 from sentry_sdk.integrations.flask import FlaskIntegration
@@ -19,7 +17,6 @@ def create_app(config_name='settings'):
 
     app.register_blueprint(internal)
     app.register_blueprint(frontend)
-
 
     sentry_sdk.init(
         integrations=[
