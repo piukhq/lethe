@@ -8,23 +8,26 @@ stages:
 tests:
   stage: test
   image: binkhq/python:3.8
-  script:
+  before_script:
     - pip install pipenv==2018.11.26
     - pipenv install --dev
+  script:
     - pipenv run pytest app/tests --cov=app
 
 complexity:
   stage: test
   image: binkhq/python:3.8
-  script:
+  before_script:
     - pip install xenon
+  script:
     - xenon --max-average A --max-modules B --max-absolute B .
 
 flake8:
   stage: test
   image: binkhq/python:3.8
-  script:
+  before_script:
     - pip install flake8
+  script:
     - flake8
 
 build-develop:
