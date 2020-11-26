@@ -31,6 +31,8 @@ flake8:
 build-develop:
   stage: build
   image: docker:latest
+  environment:
+    name: dev
   services:
     - docker:dind
   before_script:
@@ -45,6 +47,8 @@ build-develop:
 build-master:
   stage: build
   image: docker:latest
+  environment:
+    name: staging
   services:
     - docker:dind
   before_script:
