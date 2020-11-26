@@ -1,7 +1,7 @@
 # Lethe Setup
 Clone the project and install dependencies
 ```bash
-git clone os.path.dirname(
+git clone git@git.bink.com:Olympus/lethe.git
 pipenv install --dev
 ```
 
