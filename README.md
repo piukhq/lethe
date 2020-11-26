@@ -1,15 +1,13 @@
 # Lethe Setup
 Clone the project and install dependencies
-```
-$ git clone git@gitlab.loyaltyangels.local:Olympus/lethe.git
-$ virtualenv lethe_env
-$ . ./lethe_env/bin/activate
-$ pip install -r requirements.txt
+```bash
+git clone git@git.bink.com:Olympus/lethe.git
+pipenv install --dev
 ```
 
 Run the web server
-```
-$ ./manage.py runserver
+```bash
+pipenv run ./manage.py runserver
 ```
 Navigate to http://localhost:5000/ to check everything is working.
 
@@ -17,8 +15,17 @@ Navigate to http://localhost:5000/ to check everything is working.
 
 ### Environment Variables
 
-
+- `LETHE_DEBUG`
+  - Bool Value, `"True"` or `"False"`, sets up Flask debugger
 - `HERMES_URL`
   - String Value, Hermes URL
 - `LETHE_URL`
   - String Value, Lethe URL
+- `EXTERNAL_SERVER_NAME`
+  - String value, URL to use when generating URLs
+- `EXTERNAL_SERVER_NAME`
+  - String value, URL to use when generating URLs
+- `SENTRY_DSN`
+  - String value, Sentry DSN, automatically read by Sentry
+- `SENTRY_ENVIRONMENT`
+  - String value, Sentry environment, automatically read by Sentry
