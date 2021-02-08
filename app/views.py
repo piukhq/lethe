@@ -4,6 +4,7 @@ from app.models import is_valid_token, is_hermes_ready
 from flask import Blueprint, render_template, request, flash, jsonify
 from werkzeug.utils import redirect
 import settings
+from prometheus.metrics import request_counter
 
 internal = Blueprint('internal', __name__)
 frontend = Blueprint('frontend', __name__, url_prefix='/password')
@@ -60,6 +61,7 @@ def new_password(link_token=None):
 
         reset_password_url = "{}{}".format(settings.HERMES_URL, "/users/reset_password")
         response = requests.post(reset_password_url, data={'token': link_token, 'password': password})
+        request_counter.labels(status_code=response.status_code).inc()
 
         if response.status_code == 200:
             return redirect(url('account_updated'))

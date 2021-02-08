@@ -1,8 +1,10 @@
-import requests
 from typing import Tuple
+
+import requests
 
 import settings
 from app.exceptions import HermesBadResponseError
+from prometheus.metrics import request_counter
 
 
 def is_valid_token(token):
@@ -11,6 +13,8 @@ def is_valid_token(token):
         response = requests.post(valid_token_url, data={'token': token})
     except requests.exceptions.ConnectionError as e:
         raise HermesBadResponseError(f"Failed to connect to Hermes. Error: {e}")
+
+    request_counter.labels(status_code=response.status_code).inc()
     if response.status_code == 200:
         return True
     elif response.status_code == 404:
