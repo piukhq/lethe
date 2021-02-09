@@ -5,8 +5,8 @@ registry = CollectorRegistry()
 # prometheus will add _total at the end of the metric name if its a Counter
 # so this metric full name will be lethe_requests_by_status_total
 request_counter = Counter(
-    name="requests_by_status",
-    documentation="Total requests received by response's status code.",
+    name="request_by_template",
+    documentation="Total requests received by name of the returned template.",
     labelnames=("template",),
     namespace="lethe",
 )
