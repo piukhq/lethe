@@ -11,6 +11,7 @@ Werkzeug = "*"
 markupsafe = "==1.1.1"
 sentry-sdk = "*"
 blinker = "*"
+prometheus-client = "*"
 
 [dev-packages]
 jedi = "*"
