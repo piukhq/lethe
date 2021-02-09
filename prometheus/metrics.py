@@ -7,6 +7,6 @@ registry = CollectorRegistry()
 request_counter = Counter(
     name="requests_by_status",
     documentation="Total requests received by response's status code.",
-    labelnames=("status_code",),
-    namespace="lethe"
+    labelnames=("template",),
+    namespace="lethe",
 )

@@ -1,9 +1,10 @@
 import requests
-from app.exceptions import HermesBadResponseError
-from app.models import is_valid_token, is_hermes_ready
 from flask import Blueprint, render_template, request, flash, jsonify
 from werkzeug.utils import redirect
+
 import settings
+from app.exceptions import HermesBadResponseError
+from app.models import is_valid_token, is_hermes_ready
 from prometheus.metrics import request_counter
 
 internal = Blueprint('internal', __name__)
@@ -61,22 +62,26 @@ def new_password(link_token=None):
 
         reset_password_url = "{}{}".format(settings.HERMES_URL, "/users/reset_password")
         response = requests.post(reset_password_url, data={'token': link_token, 'password': password})
-        request_counter.labels(status_code=response.status_code).inc()
 
         if response.status_code == 200:
+            request_counter.labels(template="account_updated").inc()
             return redirect(url('account_updated'))
         elif response.status_code == 400:
             err = 'Password should be 8 or more characters, with at least 1 uppercase, 1 lowercase and a number'
             flash(err)
             return redirect(url(link_token))
         else:
+            request_counter.labels(template="link_expired").inc()
             return render_template('link_expired.html')
     else:
         try:
             if is_valid_token(link_token):
+                request_counter.labels(template="new_password").inc()
                 return render_template('new_password.html')
             else:
+                request_counter.labels(template="link_expired").inc()
                 return render_template('link_expired.html')
         except HermesBadResponseError:
             flash('Sorry, something has gone wrong on our end. Give us some time to fix it, and try again later!')
+            request_counter.labels(template="error_page").inc()
             return render_template('error_page.html')
