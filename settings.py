@@ -31,8 +31,6 @@ STATIC_URL = env_var("LETHE_STATIC_URL", "/password/static/")
 SECRET_KEY = "\xb9\xd1\xc13\xf3\x04\xdf\x89\xbd\xca\x8e\x16\xda\xcaj\x04\x88\xd1\x13;\xcc\xb8\x927"
 
 PROMETHEUS_LOG_LEVEL = getattr(logging, env_var("LOG_LEVEL", "INFO").upper(), logging.INFO)
-PROMETHEUS_LATENCY_BUCKETS = (.050, .125, .150, .2, .375, .450, .6, .8, 1.0, 2.0, 3.0, 4.0, 6.0, 8.0, 10.0, 12.0,
-                              15.0, 20.0, 30.0, float("inf"))
 PROMETHEUS_PUSH_GATEWAY = env_var("PROMETHEUS_PUSH_GATEWAY", "http://localhost:9100")
 PROMETHEUS_JOB = "lethe"
 
