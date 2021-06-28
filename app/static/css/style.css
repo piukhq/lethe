@@ -7,10 +7,23 @@
     padding-top: 0px;
 }
 
-h1, h2, h3, h4, h5, p {
+h1, h2, h3, h4, h5, p, input {
     font-family: "Montserrat", "Helvetica Neue", Arial, serif;
     color: #194b53;
 }
+
+label
+{
+    font-weight: 300
+}
+
+.btn-primary {
+    background-color: #8eb1b7 ;
+    border-color: #8eb1b7;
+
+}
+
+
 
 
 hr {
