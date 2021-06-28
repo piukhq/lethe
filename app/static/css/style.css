@@ -7,11 +7,17 @@
     padding-top: 0px;
 }
 
+h1, h2, h3, h4, h5, p {
+    font-family: "Montserrat", "Helvetica Neue", Arial, serif;
+    color: #194b53;
+}
+
+
 hr {
     display: block;
     height: 1px;
     border: 0;
-    border-bottom: 2px solid #f20060;
+    border-bottom: 2px solid #8eb1b7;
     margin: 1em 0;
     padding: 0;
 }
@@ -52,7 +58,7 @@ a, a:link, a:visited, a:hover, a:active {
 }
 
 #header-line {
-    background-color: #f20060;
+    background-color: #8eb1b7;
     height: 1px;
 }
 
