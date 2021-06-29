@@ -23,9 +23,6 @@ label
 
 }
 
-
-
-
 hr {
     display: block;
     height: 1px;
@@ -42,7 +39,7 @@ hr {
 
 .flash-box > span:hover {
     cursor: pointer;
-    color: #F4136B;
+    color: #8eb1b7;
 }
 
 a, a:link, a:visited, a:hover, a:active {
