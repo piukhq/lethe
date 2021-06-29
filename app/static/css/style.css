@@ -28,7 +28,14 @@ hr {
 
 .flash-box > span:hover {
     cursor: pointer;
-    color: #8eb1b7;
+    color: #ffffff;
+    background-color: #8eb1b7;
+}
+
+.flash-box {
+    color: #ffffff;
+    background-color: #df8352;
+    border-color: #df8352;
 }
 
 a, a:link, a:visited, a:hover, a:active {
