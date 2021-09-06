@@ -2,7 +2,7 @@ import logging
 import os
 import sys
 
-from environment import env_var, read_env
+from .environment import env_var, read_env
 
 read_env()
 
@@ -31,7 +31,6 @@ STATIC_URL = env_var("LETHE_STATIC_URL", "/password/static/")
 SECRET_KEY = "\xb9\xd1\xc13\xf3\x04\xdf\x89\xbd\xca\x8e\x16\xda\xcaj\x04\x88\xd1\x13;\xcc\xb8\x927"
 
 PROMETHEUS_LOG_LEVEL = getattr(logging, env_var("LOG_LEVEL", "INFO").upper(), logging.INFO)
-PROMETHEUS_PUSH_GATEWAY = env_var("PROMETHEUS_PUSH_GATEWAY", "http://localhost:9100")
 PROMETHEUS_JOB = "lethe"
 
 TESTING = any("test" in arg for arg in sys.argv)
