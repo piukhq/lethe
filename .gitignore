@@ -7,3 +7,5 @@ media
 .env
 __pychache__
 .cache
+report.xml
+coverage.xml

@@ -6,20 +6,22 @@ https://wellfire.co/blog/easier-12-factor-django/
 import os
 import re
 
+from typing import Any, cast
 
-def read_env():
+
+def read_env() -> None:
     """Pulled from Honcho code with minor updates, reads local default
     environment variables from a .env file located in the project root
     directory.
     """
     try:
-        with open('.env') as f:
+        with open(".env") as f:
             content = f.read()
     except IOError:
-        content = ''
+        content = ""
 
     for line in content.splitlines():
-        m1 = re.match(r'\A([A-Za-z_0-9]+)=(.*)\Z', line)
+        m1 = re.match(r"\A([A-Za-z_0-9]+)=(.*)\Z", line)
         if m1:
             key, val = m1.group(1), m1.group(2)
             m2 = re.match(r"\A'(.*)'\Z", val)
@@ -27,15 +29,15 @@ def read_env():
                 val = m2.group(1)
             m3 = re.match(r'\A"(.*)"\Z', val)
             if m3:
-                val = re.sub(r'\\(.)', r'\1', m3.group(1))
+                val = re.sub(r"\\(.)", r"\1", m3.group(1))
             os.environ.setdefault(key, val)
 
 
-def env_var(key, default=None):
+def env_var(key: str, default: Any = None) -> Any:
     """Retrieves env vars and makes Python boolean replacements"""
-    val = os.environ.get(key, default)
-    if val == 'True':
+    val = cast(Any, os.environ.get(key, default))
+    if val == "True":
         val = True
-    elif val == 'False':
+    elif val == "False":
         val = False
     return val

@@ -1,10 +1,16 @@
-FROM binkhq/python:3.8
+FROM ghcr.io/binkhq/python:3.9
 
 WORKDIR /app
-ADD . .
+COPY Pipfile Pipfile
+COPY Pipfile.lock Pipfile.lock
 
-RUN pip install --no-cache-dir pipenv==2018.11.26 gunicorn && \
-    pipenv install --system --deploy --ignore-pipfile
+RUN pipenv install --system --deploy --ignore-pipfile
 
+COPY lethe /app/lethe
+
+ENV PROMETHEUS_MULTIPROC_DIR=/dev/shm
+ENTRYPOINT ["linkerd-await", "--"]
 CMD [ "gunicorn", "--workers=2", "--threads=2", "--error-logfile=-", \
-                  "--access-logfile=-", "--bind=0.0.0.0:9000", "wsgi:app" ]
+                  "--logger-class=app.GunicornLogger", \
+                  "--access-logfile=-", "--bind=0.0.0.0:9000", \
+                  "--bind=0.0.0.0:9100", "lethe:app" ]
